@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(void) {
+int main(int argc, char *argv[]) {
 
 	////Q1 명령행 전달인자 사용하지 않고 파일을 열어 
 	////해당 파일 내 문자의 개수를 카운팅 하기
@@ -23,6 +23,11 @@ int main(void) {
 	//fclose(fp);
 	//printf("%s의 파일에는 %ld개의 문자가 있습니다.\n종료\n", f_name, count);
 	////기본적인 파일 입출력의 원리만 알면 쉬게 해결 할 수 있다.
+
+	//Q2. 소스파일, 타깃파일 명령행으로 받아 파일 복사 프로그램 작성
+	//argv[1]이 타깃, argv[2]가 소스파일로
+
+
 
 	return 0;
 }
