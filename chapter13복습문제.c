@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
+
+#define BUFSIZE 4096
+#define SLEN 81
+
+char* s_gets(char* st, int n);
+void append(FILE* source, FILE* dest);
 
 int main(int argc, char *argv[]) {
 
@@ -84,7 +91,61 @@ int main(int argc, char *argv[]) {
 	//fclose(fsrc);
 	//fclose(ftrg);
 
-	//Q4.명령행 제시하는 모든 파일을 차례대로 화면에 출력
+	////Q4.명령행 제시하는 모든 파일을 차례대로 화면에 출력
+	//if (1 == argc) {	//명령행 전달인자가 전혀 없다면...
+	//	puts("명령행 전달인자 항목이 비어 있습니다.");
+	//	return 0;
+	//}
+	//else {
+	//	FILE* fp;
+	//	char fName[40];	//파일이름 저장
+	//	int ch;
+	//	for (int i = 1; i < argc; i++) {
+	//		strcpy(fName, argv[i]);	//파일 이름을 복사 한다.
+	//		if ((fp = fopen(fName, "r")) == NULL) {	//없다면 없다고 알려준다.
+	//			printf("%s 파일은 없습니다.\n", argv[i]);
+	//		}
+	//		else {
+	//			while (!(feof(fp))) {
+	//				ch = fgetc(fp);
+	//				putc(ch, stdout);
+	//			}
+	//			fclose(fp);	//파일 스트림을 닫는다.
+	//		}
+	//		putc('\n', stdout);
+	//	}
+	//}
+	//puts("종료");
+
+	//Q5. 13.5의 프로그램 수정/ 명령행 입력 방식
+	FILE* fa, * fs;
+	char file_src[SLEN];
+	char file_app[SLEN];
+	int ch;
+
 
 	return 0;
+}
+
+char* s_gets(char* st, int n) {
+	char* ret_val;
+	char* find;
+
+	ret_val = fgets(st, n, stdin);
+	if (ret_val) {
+		find = strchr(st, '\n');
+		if (find)
+			*find = '\0';
+		else
+			while (getchar() != '\n')
+				continue;
+	}
+	return ret_val;
+}
+void append(FILE* source, FILE* dest) {
+	size_t bytes;
+	static char temp[BUFSIZE];
+
+	while ((bytes = fread(temp, sizeof(char), BUFSIZE, source)) > 0)
+		fwrite(temp, sizeof(char), bytes, dest);
 }
