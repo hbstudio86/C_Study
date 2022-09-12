@@ -120,8 +120,39 @@ int main(int argc, char *argv[]) {
 	//Q5. 13.5의 프로그램 수정/ 명령행 입력 방식
 	FILE* fa, * fs;
 	char file_src[SLEN];
-	char file_app[SLEN];
+	char file_app[SLEN];	//필요 없음
 	int ch;
+	//명령행 인자 2개 입력 안했을 대처리
+	if (argc == 1 || argc == 2) {
+		puts("명령행 인자를 제대로 입력하지 않았습니다.");
+		exit(EXIT_FAILURE);
+	}   
+	else {
+		puts("목적 파일의 이름이 입력되었습니다.");
+		printf("file name : %s\n", argv[1]);	//명령행 입력으로 처리
+		//목적파일 없을 때
+		if ((fa = fopen(argv[1], "a+")) == NULL) {
+			fprintf(stderr, "파일을 열수 없습니다.%s\n", argv[1]);
+			exit(EXIT_FAILURE);
+		}	
+		//사용자 버퍼를 지정함
+		if (setvbuf(fa, NULL, _IOFBF, BUFSIZE) != 0) {
+			fputs("출력 버퍼를 생성할 수 없습니다.", stderr);
+			exit(EXIT_FAILURE);
+		}	
+		//루프를 이용해 소스 파일을 가져 온다.
+		for (int i = 2; i < argc; i++) {
+			printf("%d번째 소스 파일 %s를 불러 옵니다.\n", i - 1, argv[i]);
+			if ((fs = fopen(argv[i], "r")) == NULL) {
+				fprintf(stderr, "파일 %s를 열수 없습니다.\n", argv[i]);
+			}
+			else {
+
+			}
+		}
+
+	}
+
 
 
 	return 0;
