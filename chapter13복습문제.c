@@ -5,6 +5,7 @@
 
 #define BUFSIZE 4096
 #define SLEN 81
+#define LEN 15
 
 char* s_gets(char* st, int n);
 void append(FILE* source, FILE* dest);
@@ -117,46 +118,76 @@ int main(int argc, char *argv[]) {
 	//}
 	//puts("종료");
 
-	//Q5. 13.5의 프로그램 수정/ 명령행 입력 방식
-	FILE* fa, * fs;
-	char file_src[SLEN];
-	char file_app[SLEN];	//필요 없음
+	////Q5. 13.5의 프로그램 수정/ 명령행 입력 방식
+	//FILE* fa, * fs;
+	//char file_src[SLEN];
+	//char file_app[SLEN];	//필요 없음
+	//int ch;
+	//int files = 0;
+	////명령행 인자 2개 입력 안했을 대처리
+	//if (argc == 1 || argc == 2) {
+	//	puts("명령행 인자를 제대로 입력하지 않았습니다.");
+	//	exit(EXIT_FAILURE);
+	//}   
+	//else {
+	//	puts("목적 파일의 이름이 입력되었습니다.");
+	//	printf("file name : %s\n", argv[1]);	//명령행 입력으로 처리
+	//	//목적파일 없을 때
+	//	if ((fa = fopen(argv[1], "a+")) == NULL) {
+	//		fprintf(stderr, "파일을 열수 없습니다.%s\n", argv[1]);
+	//		exit(EXIT_FAILURE);
+	//	}	
+	//	//사용자 버퍼를 지정함
+	//	if (setvbuf(fa, NULL, _IOFBF, BUFSIZE) != 0) {
+	//		fputs("출력 버퍼를 생성할 수 없습니다.\n", stderr);
+	//		exit(EXIT_FAILURE);
+	//	}	
+	//	//루프를 이용해 소스 파일을 가져 온다.
+	//	for (int i = 2; i < argc; i++) {
+	//		printf("%d번째 소스 파일 %s를 불러 옵니다.\n", i - 1, argv[i]);
+	//		if (strcmp(argv[1], argv[i]) == 0) {
+	//			fputs("자기 자신에게는 덧붙일 수 없습니다.\n", stderr);
+	//		}
+	//		else if ((fs = fopen(argv[i], "r")) == NULL) {
+	//			fprintf(stderr, "파일 %s를 열수 없습니다.\n", argv[i]);
+	//		}
+	//		else {
+	//			if (setvbuf(fs, NULL, _IOFBF, BUFSIZE) != 0) {
+	//				fputs("입력 버퍼를 생성할 수 없습니다.\n", stderr);
+	//				continue;
+	//			}
+	//			append(fs, fa);
+	//			if (ferror(fs) != 0)
+	//				fprintf(stderr, "파일을 읽는 데 에러가 발생하였습니다.%s.\n", argv[i]);
+	//			if (ferror(fa) != 0)
+	//				fprintf(stderr, "파일을 쓰는 데 에러가 발생하였습니다.%s.\n", argv[1]);
+	//			fclose(fs);
+	//			files++;
+	//			printf("%s 파일의 내용을 덧 붙였습니다.\n", argv[i]);
+	//			puts("다음 소스 파일의 이름을 입력합니다.");
+	//		}
+	//	}
+	//	printf("종료. %d개의 파일을 덧붙였습니다.\n", files);
+	//	rewind(fa);
+	//	printf("%s 내용:\n", argv[1]);
+	//	while ((ch = getc(fa)) != EOF) {
+	//		putchar(ch);
+	//	}
+	//	puts("종료 나타내기.");
+	//	fclose(fa);
+
+	//q6 13.2 코드를 대화형식으로 만들기
+	//q6 우선 원본 코드를 이해하기 위해 직접 써보자
+	//파일을 2/3으로 압축한다??!!
+	FILE* in, * out;
 	int ch;
-	//명령행 인자 2개 입력 안했을 대처리
-	if (argc == 1 || argc == 2) {
-		puts("명령행 인자를 제대로 입력하지 않았습니다.");
-		exit(EXIT_FAILURE);
-	}   
-	else {
-		puts("목적 파일의 이름이 입력되었습니다.");
-		printf("file name : %s\n", argv[1]);	//명령행 입력으로 처리
-		//목적파일 없을 때
-		if ((fa = fopen(argv[1], "a+")) == NULL) {
-			fprintf(stderr, "파일을 열수 없습니다.%s\n", argv[1]);
-			exit(EXIT_FAILURE);
-		}	
-		//사용자 버퍼를 지정함
-		if (setvbuf(fa, NULL, _IOFBF, BUFSIZE) != 0) {
-			fputs("출력 버퍼를 생성할 수 없습니다.", stderr);
-			exit(EXIT_FAILURE);
-		}	
-		//루프를 이용해 소스 파일을 가져 온다.
-		for (int i = 2; i < argc; i++) {
-			printf("%d번째 소스 파일 %s를 불러 옵니다.\n", i - 1, argv[i]);
-			if ((fs = fopen(argv[i], "r")) == NULL) {
-				fprintf(stderr, "파일 %s를 열수 없습니다.\n", argv[i]);
-			}
-			else {
-
-			}
-		}
-
-	}
-
-
+	char name[LEN];
+	int count = 0;
+	//명령행 전달인자를 검사한다.
 
 	return 0;
 }
+
 
 char* s_gets(char* st, int n) {
 	char* ret_val;
