@@ -181,10 +181,42 @@ int main(int argc, char *argv[]) {
 	//파일을 2/3으로 압축한다??!!
 	FILE* in, * out;
 	int ch;
-	char name[LEN];
+	char inname[LEN];
+	char outname[LEN];
 	int count = 0;
 	//명령행 전달인자를 검사한다.
-
+	puts("간단한 파일 압축 프로그램입니다.");
+	puts("압축 할 파일명을 입력하세요");
+	printf("File name>> ");
+	fgets(inname, 14, stdin);
+	for (int i = 0; i < LEN; i++) {
+		if (inname[i] == '\n') {
+			inname[i] = '\0';
+			break;
+		}
+	}
+	if ((in = fopen(inname, "r")) == NULL) {
+		fprintf(stderr, "%s 파일을 읽어 올 수 없습니다.\n", inname);
+		exit(EXIT_FAILURE);
+	}
+	strncpy(outname, inname, LEN - 5);	//확장자까지 파일명으로 하겠다는 것인가>
+	//printf("%s", outname);
+	outname[LEN - 5] = '\0';
+	strcat(outname, ".red");	//확장자를 붙인다.
+	if ((out = fopen(outname, "w")) == NULL) {	//파일 쓰기
+		fprintf(stderr, "%s 파일을 생성할 수 없습니다.\n", outname);
+		exit(EXIT_FAILURE);
+	}
+	while ((ch = fgetc(in)) != EOF) {
+		if ((count++ % 3) == 0) {
+			putc(ch, out);
+		}
+	}
+	if (fclose(in) != 0 || fclose(out) != 0) {
+		fprintf(stderr, "파일을 닫는데 문제가 생겼다\n");
+		exit(EXIT_FAILURE);
+	}
+	//후기 : 오랜만에 해서 좀 시간이 걸렸지만, 그래도 문제 해결을 했음
 	return 0;
 }
 
