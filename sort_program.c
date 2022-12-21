@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <memory.h>
 
 #define LOWLIMIT 5
 #define UPLIMIT 30
@@ -9,12 +10,15 @@
 
 //###함수 선언###
 int _fCheck(int*);
+void _fSelectSORT(int[], int[], int);	//선택 정렬
 
 int main(void) {
 
 	//변수 선언
 	int _iArrSize;
+	int _iCommand = 0;	//입력 command
 	int* _iParr;
+	int* _iParr2;	//옮겨 담은 배열
 	srand(time(NULL));	//시드 
 
 	//처리
@@ -23,18 +27,34 @@ int main(void) {
 	getchar();
 	_iArrSize = _fCheck(&_iArrSize);
 	_iParr = (int*)malloc(sizeof(int) * _iArrSize);	//입력한 크기 만큼 동적 배열 할당
+	_iParr2 = (int*)malloc(sizeof(int) * _iArrSize);	//옮겨 담을 배열
+	memset(_iParr2, 0, sizeof(int) * _iArrSize);			//0으로 초기화
+	printf("%d\n", sizeof(int) * _iArrSize);
 	//만약 malloc 함수가 실패한다면...
 	if (NULL == _iParr) {
 		free(_iParr);
 		exit(EXIT_FAILURE);
 	}
+	////동적 할당한 배열에 값 넣기
 	else {
 		for (int i = 0; i < _iArrSize; i++) {
 			_iParr[i] = rand();
-			printf("[%02d] %06d\n", i, _iParr[i]);
+			printf("[%02d] %06d | %06d\n", i, _iParr[i], _iParr2[i]);
 		}
 	}
-	////동적 할당한 배열에 값 넣기
+
+	do {
+		printf("\n======= SELECT of SORT Program =======\n");
+		scanf("%d", &_iCommand);
+		switch (_iCommand)
+		{
+		case 1:
+			//_fSelectSORT();
+			break;
+		default:
+			break;
+		}
+	} while (_iCommand != 0);
 
 	//출력
 	free(_iParr);
@@ -52,4 +72,8 @@ int _fCheck(int* input) {
 		scanf("%d", input);
 	}
 	return *input;
+}
+//선택정렬
+void _fSelectSORT(int ar1[], int ar2[], int n) {
+
 }
