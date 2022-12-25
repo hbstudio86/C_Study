@@ -10,7 +10,7 @@
 
 //###함수 선언###
 int _fCheck(int*);
-void _fSelectSORT(int[], int[], int);	//선택 정렬
+void _fSelectSORT(int*, int*, int);	//선택 정렬
 
 int main(void) {
 
@@ -45,11 +45,13 @@ int main(void) {
 
 	do {
 		printf("\n======= SELECT of SORT Program =======\n");
+		puts("1.Select SORT");
+		puts("0.Program END");
 		scanf("%d", &_iCommand);
 		switch (_iCommand)
 		{
 		case 1:
-			//_fSelectSORT();
+			_fSelectSORT(_iParr, _iParr2, _iArrSize);
 			break;
 		default:
 			break;
@@ -74,6 +76,23 @@ int _fCheck(int* input) {
 	return *input;
 }
 //선택정렬
-void _fSelectSORT(int ar1[], int ar2[], int n) {
+void _fSelectSORT(int *ar1, int *ar2, int n) {
+	puts("Select SORT Start");
+	int Step = 0;		//스텝수
+	int Comp = 0;		//비교
+	int End = 0;		//완료
+	int Min = 0;		//0으로 초기화
+	int MinIdx = 0;		//가장 작은 배열의 index 번호를 저장
+	for (int i = 0; i < n; i++) {
+		Min = ar1[i];	//첫 배열의 값으로 최소 값을 초기화
+		for (int j = End; j < n; j++) {
+			if (ar1[j] < Min) {	//만약 현재 배열이 제일 작다면...
+				MinIdx = j;		//제일 작은 배열값을 저장
+				Min = ar1[j];	//min값을 갱신
+			}
+		}
+		ar2[End] = ar1[MinIdx];
+		End++;
 
+	}
 }
