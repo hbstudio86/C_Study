@@ -10,7 +10,9 @@
 
 //###함수 선언###
 int _fCheck(int*);
-void _fSelectSORT(int*, int*, int);	//선택 정렬
+void _fResult(int[], int[], int);	//정렬후 값 출력용
+void _fSelectSORT(int[], int);	//선택 정렬
+void _fBubbleSORT(int[], int);	//버블 정렬
 
 int main(void) {
 
@@ -28,8 +30,15 @@ int main(void) {
 	_iArrSize = _fCheck(&_iArrSize);
 	_iParr = (int*)malloc(sizeof(int) * _iArrSize);	//입력한 크기 만큼 동적 배열 할당
 	_iParr2 = (int*)malloc(sizeof(int) * _iArrSize);	//옮겨 담을 배열
-	memset(_iParr2, 0, sizeof(int) * _iArrSize);			//0으로 초기화
-	printf("%d\n", sizeof(int) * _iArrSize);
+	if (_iParr2 != NULL) {		//메모리가 제대로 할당되었다면...	삭제해도 된다.
+		memset(_iParr2, 0, sizeof(int) * _iArrSize);			//0으로 초기화
+	}
+	else {	//메모리 할당 실패시
+		puts("메모리 할당에 실패하였습니다. 프로그램을 종료합니다.");
+		free(_iParr2);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", sizeof(int) * _iArrSize);	//삭제 해도 된다.
 	//만약 malloc 함수가 실패한다면...
 	if (NULL == _iParr) {
 		free(_iParr);
@@ -42,24 +51,33 @@ int main(void) {
 			printf("[%02d] %06d | %06d\n", i, _iParr[i], _iParr2[i]);
 		}
 	}
+	memcpy(_iParr2, _iParr, sizeof(int) * _iArrSize);	//원본을 저장하고 복사본을 만듭니다.
 
 	do {
 		printf("\n======= SELECT of SORT Program =======\n");
 		puts("1.Select SORT");
+		puts("2.Bubble SORT");
 		puts("0.Program END");
 		scanf("%d", &_iCommand);
+		//원본을 보존하고 복사본으로 정렬합니다.
 		switch (_iCommand)
 		{
 		case 1:
-			_fSelectSORT(_iParr, _iParr2, _iArrSize);
+			_fSelectSORT(_iParr2, _iArrSize);
+			break;
+		case 2:
+			_fBubbleSORT(_iParr2, _iArrSize);
 			break;
 		default:
 			break;
 		}
+		_fResult(_iParr, _iParr2, _iArrSize);
+		memcpy(_iParr2, _iParr, sizeof(int) * _iArrSize);	//원본을 저장하고 복사본을 만듭니다.
 	} while (_iCommand != 0);
 
 	//출력
 	free(_iParr);
+	free(_iParr2);
 	puts("종료");
 
 	return 0;
@@ -75,24 +93,37 @@ int _fCheck(int* input) {
 	}
 	return *input;
 }
-//선택정렬
-void _fSelectSORT(int *ar1, int *ar2, int n) {
-	puts("Select SORT Start");
-	int Step = 0;		//스텝수
-	int Comp = 0;		//비교
-	int End = 0;		//완료
-	int Min = 0;		//0으로 초기화
-	int MinIdx = 0;		//가장 작은 배열의 index 번호를 저장
-	for (int i = 0; i < n; i++) {
-		Min = ar1[i];	//첫 배열의 값으로 최소 값을 초기화
-		for (int j = End; j < n; j++) {
-			if (ar1[j] < Min) {	//만약 현재 배열이 제일 작다면...
-				MinIdx = j;		//제일 작은 배열값을 저장
-				Min = ar1[j];	//min값을 갱신
-			}
-		}
-		ar2[End] = ar1[MinIdx];
-		End++;
 
+//확인용:정렬 전/후 비교
+void _fResult(int bf[], int af[], int n) {
+	for (int i = 0; i < n; i++) {
+		printf("[%02d] %06d | %06d \n", i, bf[i], af[i]);
 	}
+}
+
+//선택정렬
+void _fSelectSORT(int src[],  int n) {
+	puts("Select SORT Start");
+	int Step = 0, Comp = 0; //step수와 비교 횟수를 표시
+	//int MinVal = src[0];		//최소값 저장, 배열 첫 멤버를 저장 함
+	int MinVal;					//index 번호를 저장
+	int tmp = 0;	//임시 변수, 최소값 교환을 위해 사용
+	for (int i = 0; i < n; i++) {
+		MinVal = i;	//index 번호는 최대한 갱신
+		for (int j = 1 + i; j < n; j++) {
+			if (src[MinVal] > src[j]) {
+				MinVal = j;	//최소값이면 그값의 index번호를 저장
+			}
+			Comp++;
+		}
+		//1회전이 끝나면..교환이 이루어 진다.
+		tmp = src[i];
+		src[i] = src[MinVal];
+		src[MinVal] = tmp;
+	}
+	printf("Select SORT Result: Compare_%d\n", Comp);
+}
+
+void _fBubbleSORT(int src[], int n) {
+
 }
