@@ -205,7 +205,7 @@ void _fInsertSORT(int src[], int n) {
 				_fSwap(&src[i], &src[j], i, j);
 				Comp++;
 				_fOutComp(Comp);
-				_fResult3(src, n, i, j);
+				_fResult3(src, n, j, i);
 			}
 		}
 	}
@@ -216,9 +216,12 @@ void _fInsertSORT2(int src[], int n) {
 	//reverse loop
 	puts("Insert SORT Start (MODE2)");
 	int Step = 0, Comp = 0, tmp = 0;
+	int trgIdx = 0;	//삽입해야 할 목표 index값
 	for (int i = 1; i < n; i++) {
 		for (int j = 0; j < i; j++) {
-			if (src[i]<src[])
+			if (src[i] < src[j]) {
+				trgIdx = j;
+			}
 		}
 	}
 }
