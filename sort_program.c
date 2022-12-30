@@ -18,6 +18,8 @@ void _fOutComp(int);
 void _fOutComp2(int);	//결과 출력용
 void _fSelectSORT(int[], int);	//선택 정렬
 void _fBubbleSORT(int[], int);	//버블 정렬
+void _fInsertSORT(int[], int);	//삽입 정렬#1
+void _fInsertSORT2(int[], int);	//삽입 정렬#2
 
 int main(void) {
 
@@ -62,6 +64,7 @@ int main(void) {
 		printf("\n======= SELECT of SORT Program =======\n");
 		puts("1.Select SORT");
 		puts("2.Bubble SORT");
+		puts("3.Insert SORT");
 		puts("0.Program END");
 		scanf("%d", &_iCommand);
 		//원본을 보존하고 복사본으로 정렬합니다.
@@ -75,6 +78,10 @@ int main(void) {
 		case 2:
 			_fResult2(_iParr2, _iArrSize);
 			_fBubbleSORT(_iParr2, _iArrSize);
+			break;
+		case 3:
+			_fResult2(_iParr2, _iArrSize);
+			_fInsertSORT(_iParr2, _iArrSize);
 			break;
 		default:
 			break;
@@ -171,20 +178,47 @@ void _fSelectSORT(int src[],  int n) {
 	}
 	_fOutComp2(Comp);	//총 결과값
 }
-
+//버블 정렬
 void _fBubbleSORT(int src[], int n) {
-	puts("Select SORT Start");
+	puts("Bubble SORT Start");
 	int Step = 0, Comp = 0;
 	int tmp = 0;
 	for (int i = 1; i < n; i++) {
 		for (int j = 0; j < (n-i); j++) {
 			if (src[j] > src[j + 1]) {
-				_fSwap(&src[j + 1], &src[j], j + 1, j);
+				_fSwap(&src[j], &src[j + 1], j, j + 1);
 				Comp++;
 				_fOutComp(Comp);
-				_fResult3(src, n, j + 1, j);
+				_fResult3(src, n, j, j + 1);
 			}
 		}
 	}
 	_fOutComp2(Comp);
+}
+//삽입 정렬(mode1)
+void _fInsertSORT(int src[], int n) {
+	puts("Insert SORT Start");
+	int Step = 0, Comp = 0, tmp = 0;
+	for (int i = 1; i < n; i++) {
+		for (int j = 0; j < i; j++) {
+			if (src[i] < src[j]) {	//작으면 앞으로
+				_fSwap(&src[i], &src[j], i, j);
+				Comp++;
+				_fOutComp(Comp);
+				_fResult3(src, n, i, j);
+			}
+		}
+	}
+	_fOutComp2(Comp);
+}
+//삽입 정렬(mode2)
+void _fInsertSORT2(int src[], int n) {
+	//reverse loop
+	puts("Insert SORT Start (MODE2)");
+	int Step = 0, Comp = 0, tmp = 0;
+	for (int i = 1; i < n; i++) {
+		for (int j = 0; j < i; j++) {
+			if (src[i]<src[])
+		}
+	}
 }
