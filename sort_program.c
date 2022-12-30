@@ -20,6 +20,7 @@ void _fSelectSORT(int[], int);	//선택 정렬
 void _fBubbleSORT(int[], int);	//버블 정렬
 void _fInsertSORT(int[], int);	//삽입 정렬#1
 void _fInsertSORT2(int[], int);	//삽입 정렬#2
+void _fQuickSORT(int[], int);	//퀵 정렬
 
 int main(void) {
 
@@ -219,9 +220,15 @@ void _fInsertSORT2(int src[], int n) {
 	int trgIdx = 0;	//삽입해야 할 목표 index값
 	for (int i = 1; i < n; i++) {
 		for (int j = 0; j < i; j++) {
-			if (src[i] < src[j]) {
+			if (src[i] < src[j]) {	//여기서 loop를 역으로 돌리면서 자리를 바꾼다
 				trgIdx = j;
-			}
+			}	//comp 카운팅은 하지 않는다.
 		}
 	}
+}
+//퀵 정렬
+void _fQuickSORT(int src[], int n) {
+	puts("Quick SORT Start");
+	int Step = 0, Comp = 0, tmp = 0;
+
 }
