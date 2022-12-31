@@ -20,7 +20,7 @@ void _fSelectSORT(int[], int);	//선택 정렬
 void _fBubbleSORT(int[], int);	//버블 정렬
 void _fInsertSORT(int[], int);	//삽입 정렬#1
 void _fInsertSORT2(int[], int);	//삽입 정렬#2
-void _fQuickSORT(int[], int);	//퀵 정렬
+void _fQuickSORT(int[], int, int);	//퀵 정렬, 배열, 크기, 비벗위치
 
 int main(void) {
 
@@ -66,6 +66,7 @@ int main(void) {
 		puts("1.Select SORT");
 		puts("2.Bubble SORT");
 		puts("3.Insert SORT");
+		puts("33.Insert SORT(2)");
 		puts("0.Program END");
 		scanf("%d", &_iCommand);
 		//원본을 보존하고 복사본으로 정렬합니다.
@@ -84,6 +85,8 @@ int main(void) {
 			_fResult2(_iParr2, _iArrSize);
 			_fInsertSORT(_iParr2, _iArrSize);
 			break;
+		case 33:
+			puts("NO Function");
 		default:
 			break;
 		}
@@ -227,8 +230,23 @@ void _fInsertSORT2(int src[], int n) {
 	}
 }
 //퀵 정렬
-void _fQuickSORT(int src[], int n) {
+void _fQuickSORT(int src[], int n, int Pv) {
+	//P <...L...> T <...R...>
+	//P <L> T <R> P <L> T <R>
+	//P -> P : 변경 할 필요가 없다
+	//T -> P : 시작점이 달라진다.
+	// P L R
+	// 2 1 3
+	// P R L
+	// 1 2 3
+	// 총길이가 3이면 끝
+	// 3 미만이면 비교 후 자리 교환
 	puts("Quick SORT Start");
 	int Step = 0, Comp = 0, tmp = 0;
+	//재귀함수
+	int PV;	//피벗
+	int Left = Pv+1, Right = n;	//L,R
+	for (int i = 0; i < n; i++) {
 
+	}
 }
