@@ -67,6 +67,7 @@ int main(void) {
 		puts("2.Bubble SORT");
 		puts("3.Insert SORT");
 		puts("33.Insert SORT(2)");
+		puts("4.Shell SORT");
 		puts("0.Program END");
 		scanf("%d", &_iCommand);
 		//원본을 보존하고 복사본으로 정렬합니다.
@@ -244,9 +245,41 @@ void _fQuickSORT(int src[], int n, int Pv) {
 	puts("Quick SORT Start");
 	int Step = 0, Comp = 0, tmp = 0;
 	//재귀함수
-	int PV;	//피벗
+	int PV = Pv;	//피벗
 	int Left = Pv+1, Right = n;	//L,R
-	for (int i = 0; i < n; i++) {
+	int CNT = 0;	//카운팅
+	int Ltg = 0, Rtg = 0;	//trigger
 
+	if (n == 2) {	//재귀함수를 실행 할 필요가 없는 경우...
+		//_fSwap(&src[PV], &src[Left], );	//이러면 특정 index가아닌 1 <--> 2이런 형식밖에 안됨
+	}
+	else if (n = 1) {
+
+	}
+	else {	//재귀 함수 실행
+		while (1)
+		{
+			if (src[Left] < src[PV] && Ltg == 0) {	//left가 pv보다 작고 trg가 비활성화면 다음 배열을 확인
+				Left++;
+			}
+			else {	//아니면 트리거 활성화
+				Ltg = 1;
+			}
+			if (src[Right] > PV) {
+				Right--;
+			}
+			if ((Ltg == 1 && Rtg == 1) && Left < Right) {	//L,R 트리거가 모두 활성화라면...
+				_fSwap(&src[Left], &src[Right], Left, Right);	//제대로 되어 있다면 교환한다.
+			}
+			else if (Left > Right) {
+				_fSwap(&src[PV], &src[Right], PV, Right);	//L,R이 서로 통과 하였다면 pv와 right를 바꾼다.
+				_fQuickSORT(&src[PV], Right-1, PV);	//pv를 왜보내게 했지?? 아무튼 L측 분활
+				_fQuickSORT(&src[Left], n - Right, Left);
+			}
+			CNT++;
+			if (CNT >= n) { //loop의 유한성을 보장하기 위한 장치
+				break;
+			}
+		}
 	}
 }
