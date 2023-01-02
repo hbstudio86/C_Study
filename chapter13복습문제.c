@@ -176,47 +176,74 @@ int main(int argc, char *argv[]) {
 	//	puts("종료 나타내기.");
 	//	fclose(fa);
 
-	//q6 13.2 코드를 대화형식으로 만들기
-	//q6 우선 원본 코드를 이해하기 위해 직접 써보자
-	//파일을 2/3으로 압축한다??!!
-	FILE* in, * out;
-	int ch;
-	char inname[LEN];
-	char outname[LEN];
-	int count = 0;
-	//명령행 전달인자를 검사한다.
-	puts("간단한 파일 압축 프로그램입니다.");
-	puts("압축 할 파일명을 입력하세요");
-	printf("File name>> ");
-	fgets(inname, 14, stdin);
-	for (int i = 0; i < LEN; i++) {
-		if (inname[i] == '\n') {
-			inname[i] = '\0';
-			break;
-		}
+	////q6 13.2 코드를 대화형식으로 만들기
+	////q6 우선 원본 코드를 이해하기 위해 직접 써보자
+	////파일을 2/3으로 압축한다??!!
+	//FILE* in, * out;
+	//int ch;
+	//char inname[LEN];
+	//char outname[LEN];
+	//int count = 0;
+	////명령행 전달인자를 검사한다.
+	//puts("간단한 파일 압축 프로그램입니다.");
+	//puts("압축 할 파일명을 입력하세요");
+	//printf("File name>> ");
+	//fgets(inname, 14, stdin);
+	//for (int i = 0; i < LEN; i++) {
+	//	if (inname[i] == '\n') {
+	//		inname[i] = '\0';
+	//		break;
+	//	}
+	//}
+	//if ((in = fopen(inname, "r")) == NULL) {
+	//	fprintf(stderr, "%s 파일을 읽어 올 수 없습니다.\n", inname);
+	//	exit(EXIT_FAILURE);
+	//}
+	//strncpy(outname, inname, LEN - 5);	//확장자까지 파일명으로 하겠다는 것인가>
+	////printf("%s", outname);
+	//outname[LEN - 5] = '\0';
+	//strcat(outname, ".red");	//확장자를 붙인다.
+	//if ((out = fopen(outname, "w")) == NULL) {	//파일 쓰기
+	//	fprintf(stderr, "%s 파일을 생성할 수 없습니다.\n", outname);
+	//	exit(EXIT_FAILURE);
+	//}
+	//while ((ch = fgetc(in)) != EOF) {
+	//	if ((count++ % 3) == 0) {
+	//		putc(ch, out);
+	//	}
+	//}
+	//if (fclose(in) != 0 || fclose(out) != 0) {
+	//	fprintf(stderr, "파일을 닫는데 문제가 생겼다\n");
+	//	exit(EXIT_FAILURE);
+	//}
+	////후기 : 오랜만에 해서 좀 시간이 걸렸지만, 그래도 문제 해결을 했음
+
+	//q7. 두 파일 교차 출력
+	//argv[1]이 첫번째 파일, argv[2] 두번째 파일
+	FILE* ff, * sf;	//ff = first file, sf = second file
+	char fFile[LEN];
+	char sFile[LEN];
+
+	if (argc == 1) {	//만약 명령행이 입력되지 않았다면... 사용자에게서 입력을 받도록 한다.
+		puts("명령행 전달인자가 입력되지 않았습니다.");
+		puts("첫 번째 파일이름을 입력하세요");
+		s_gets(fFile, LEN);
+		puts("두 번째 파일이름을 입력하세요");
+		s_gets(sFile, LEN);
 	}
-	if ((in = fopen(inname, "r")) == NULL) {
-		fprintf(stderr, "%s 파일을 읽어 올 수 없습니다.\n", inname);
+	else {	//입력을 하나만 받는경우는 없다고 가정한다.
+
+	}
+	if ((ff = fopen(fFile, "r")) == NULL) {
+		puts("File이 없습니다.");
 		exit(EXIT_FAILURE);
 	}
-	strncpy(outname, inname, LEN - 5);	//확장자까지 파일명으로 하겠다는 것인가>
-	//printf("%s", outname);
-	outname[LEN - 5] = '\0';
-	strcat(outname, ".red");	//확장자를 붙인다.
-	if ((out = fopen(outname, "w")) == NULL) {	//파일 쓰기
-		fprintf(stderr, "%s 파일을 생성할 수 없습니다.\n", outname);
+	if ((sf = fopen(sFile, "r")) == NULL) {
+		puts("File이 없습니다.");
 		exit(EXIT_FAILURE);
 	}
-	while ((ch = fgetc(in)) != EOF) {
-		if ((count++ % 3) == 0) {
-			putc(ch, out);
-		}
-	}
-	if (fclose(in) != 0 || fclose(out) != 0) {
-		fprintf(stderr, "파일을 닫는데 문제가 생겼다\n");
-		exit(EXIT_FAILURE);
-	}
-	//후기 : 오랜만에 해서 좀 시간이 걸렸지만, 그래도 문제 해결을 했음
+	fclose(ff);
+	fclose(sf);
 	return 0;
 }
 
