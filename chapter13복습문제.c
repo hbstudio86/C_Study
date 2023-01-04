@@ -224,7 +224,7 @@ int main(int argc, char *argv[]) {
 	char fFile[LEN];
 	char sFile[LEN];
 	char Strings[SLEN];
-	int _iEOF ;
+	//int _iEOF ;
 
 	if (argc == 1) {	//만약 명령행이 입력되지 않았다면... 사용자에게서 입력을 받도록 한다.
 		puts("명령행 전달인자가 입력되지 않았습니다.");
@@ -246,16 +246,38 @@ int main(int argc, char *argv[]) {
 	}
 	else {
 		while (1) {
-			_iEOF = feof(ff);	//feof는 eof를 만나면 0이 아닌 값을 return 한다.
-			if (!feof(ff)) {
-				//fputs(Strings, ff);
-				_iEOF = fgets(Strings, SLEN - 1, ff);
-			}
+			//_iEOF = feof(ff);	//feof는 eof를 만나면 0이 아닌 값을 return 한다.
+			//if (!feof(ff)) {
+			//	//fputs(Strings, ff);
+			//	fgets(Strings, SLEN - 1, ff);	//읽어 온다
+			//	fprintf(stdout, "%s", Strings);
+			//}
+			//else if (!feof(sf)) {
+			//	fgets(Strings, SLEN - 1, sf);
+			//	fprintf(stdout, "%s", Strings);
+			//}
 			//이부분이 막히네
 			//if ((_iEOF = fgets(Strings, SLEN - 1, ff) != EOF)) {
 			//	fprintf(stdout, "%s", Strings);
 			//}
-			else {
+			//else {
+			//	break;
+			//}
+			if (!feof(ff)) {
+				fgets(Strings, SLEN - 1, ff);
+				//s_gets(Strings, SLEN);
+				//fprintf(stdout, "%s\n", Strings);
+				fputs(Strings, stdout);	//마지막줄이 개행이 안되네?
+				memset(Strings, '\n', sizeof(char) * SLEN);
+			}
+			if (!feof(sf)) {
+				fgets(Strings, SLEN - 1, sf);
+				//s_gets(Strings, SLEN);
+				//fprintf(stdout, "%s\n", Strings);
+				fputs(Strings, stdout);
+				memset(Strings, '\n', sizeof(char) * SLEN);
+			}
+			if (feof(ff) && feof(sf)) {
 				break;
 			}
 		}
