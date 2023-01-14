@@ -1,4 +1,5 @@
 #pragma warning (disable:6031)
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
