@@ -278,6 +278,8 @@ int main(int argc, char *argv[]) {
 				fgets(Strings, SLEN - 1, sf);
 				//s_gets(Strings, SLEN);
 				//fprintf(stdout, "%s\n", Strings);
+				str_lens = strlen(Strings);
+				strEnd(Strings, str_lens);
 				fputs(Strings, stdout);
 				memset(Strings, '\n', sizeof(char) * SLEN);
 			}
@@ -320,17 +322,9 @@ char* strEnd(char* str, int len) {
 
 	//처음부터 루프를 돌리는것이 아니라 
 	//끝에서부터 역으로 돌려서 바로 다음이 개행인지 여부만 판단하면 된다.
-
-	int _char = 0;
-
-	while (str[_char] != '\0')
-	{
-		if (_char == len) {			//문자열 끝에 도달했는데 개행이 없다면...
-			str[_char] = '\n';		//널문자를 개행으로 변경하고
-			str[_char + 1] = '\0';	//다음 문자를 개행으로 변경 한다
-			break;
-		}
-		_char++;
+	if (str[len - 1] != '\n') {		//만약 개행이 아니라면...
+		str[len] = '\n';			//끝을 개행으로 해주고
+		str[len + 1] = '\0';		//그 다음을 널문자로 해준다.
 	}
 
 	return str;
