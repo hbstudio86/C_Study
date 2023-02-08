@@ -221,77 +221,89 @@ int main(int argc, char *argv[]) {
 	//}
 	////후기 : 오랜만에 해서 좀 시간이 걸렸지만, 그래도 문제 해결을 했음
 
-	//q7. 두 파일 교차 출력
-	//argv[1]이 첫번째 파일, argv[2] 두번째 파일
-	FILE* ff, * sf;	//ff = first file, sf = second file
-	char fFile[LEN];
-	char sFile[LEN];
-	char Strings[SLEN];
-	unsigned int str_lens;
-	//int _iEOF ;
+	////q7. 두 파일 교차 출력
+	////argv[1]이 첫번째 파일, argv[2] 두번째 파일
+	//FILE* ff, * sf;	//ff = first file, sf = second file
+	//char fFile[LEN];
+	//char sFile[LEN];
+	//char Strings[SLEN];
+	//unsigned int str_lens;
+	////int _iEOF ;
+	//if (argc == 1) {	//만약 명령행이 입력되지 않았다면... 사용자에게서 입력을 받도록 한다.
+	//	puts("명령행 전달인자가 입력되지 않았습니다.");
+	//	puts("첫 번째 파일이름을 입력하세요");
+	//	s_gets(fFile, LEN);
+	//	puts("두 번째 파일이름을 입력하세요");
+	//	s_gets(sFile, LEN);
+	//}
+	//else {	//입력을 하나만 받는경우는 없다고 가정한다.
+	//}
+	//if ((ff = fopen(fFile, "r")) == NULL) {
+	//	puts("첫 번째 File이 없습니다.");
+	//	exit(EXIT_FAILURE);
+	//}
+	//else if ((sf = fopen(sFile, "r")) == NULL) {
+	//	puts("두 번째 File이 없습니다.");
+	//	exit(EXIT_FAILURE);
+	//}
+	//else {
+	//	while (1) {
+	//		//_iEOF = feof(ff);	//feof는 eof를 만나면 0이 아닌 값을 return 한다.
+	//		//if (!feof(ff)) {
+	//		//	//fputs(Strings, ff);
+	//		//	fgets(Strings, SLEN - 1, ff);	//읽어 온다
+	//		//	fprintf(stdout, "%s", Strings);
+	//		//}
+	//		//else if (!feof(sf)) {
+	//		//	fgets(Strings, SLEN - 1, sf);
+	//		//	fprintf(stdout, "%s", Strings);
+	//		//}
+	//		//이부분이 막히네
+	//		//if ((_iEOF = fgets(Strings, SLEN - 1, ff) != EOF)) {
+	//		//	fprintf(stdout, "%s", Strings);
+	//		//}
+	//		//else {
+	//		//	break;
+	//		//}
+	//		if (!feof(ff)) {
+	//			fgets(Strings, SLEN - 1, ff);
+	//			//s_gets(Strings, SLEN);
+	//			//fprintf(stdout, "%s\n", Strings);
+	//			str_lens = strlen(Strings);
+	//			strEnd(Strings, str_lens);
+	//			fputs(Strings, stdout);	//마지막줄이 개행이 안되네?
+	//			memset(Strings, '\n', sizeof(char) * SLEN);
+	//		}
+	//		if (!feof(sf)) {
+	//			fgets(Strings, SLEN - 1, sf);
+	//			//s_gets(Strings, SLEN);
+	//			//fprintf(stdout, "%s\n", Strings);
+	//			str_lens = strlen(Strings);
+	//			strEnd(Strings, str_lens);
+	//			fputs(Strings, stdout);
+	//			memset(Strings, '\n', sizeof(char) * SLEN);
+	//		}
+	//		if (feof(ff) && feof(sf)) {
+	//			break;
+	//		}
+	//	}
+	//}
+	//fclose(ff);
+	//fclose(sf);
+	//후기 : 
 
-	if (argc == 1) {	//만약 명령행이 입력되지 않았다면... 사용자에게서 입력을 받도록 한다.
-		puts("명령행 전달인자가 입력되지 않았습니다.");
-		puts("첫 번째 파일이름을 입력하세요");
-		s_gets(fFile, LEN);
-		puts("두 번째 파일이름을 입력하세요");
-		s_gets(sFile, LEN);
+	// Q8. 
+	// 1. 하나의 문자와 파일 이름들을 입력 받는다.
+	// 2. 파일 이름이 입력되지 않는다면 사용자에게 입력할 것을 알려줘야 한다.
+	// 3. 파일 이름이 입력되면 해당 파일에서 입력된 문자가 몇 번 사용되었는지 보고 해야 한다.
+	// 4. 파일 이름, 문자, 사용된 횟수와 같이 표시 되도록 한다.
+	// 5. 전달 인자의 개수가 정확한지, 파일들이 제대로 열렸는지 알려주는 에러 체킹 코드를 포함 할 것.
+	// 6. 파일을 열수 없으면, 그 사실을 출력하고 다음 파일로 넘어 간다.
+	// 명령행 전달인자로 문자와 파일이름을 전달받기
+	if (1 == argc) {	//만약 명령행 전달인자가 기본(본프로그램)이라면...
+		puts("명령행 전달인자가 없습니다.\n사용자 입력을 받습니다...");
 	}
-	else {	//입력을 하나만 받는경우는 없다고 가정한다.
 
-	}
-	if ((ff = fopen(fFile, "r")) == NULL) {
-		puts("첫 번째 File이 없습니다.");
-		exit(EXIT_FAILURE);
-	}
-	else if ((sf = fopen(sFile, "r")) == NULL) {
-		puts("두 번째 File이 없습니다.");
-		exit(EXIT_FAILURE);
-	}
-	else {
-		while (1) {
-			//_iEOF = feof(ff);	//feof는 eof를 만나면 0이 아닌 값을 return 한다.
-			//if (!feof(ff)) {
-			//	//fputs(Strings, ff);
-			//	fgets(Strings, SLEN - 1, ff);	//읽어 온다
-			//	fprintf(stdout, "%s", Strings);
-			//}
-			//else if (!feof(sf)) {
-			//	fgets(Strings, SLEN - 1, sf);
-			//	fprintf(stdout, "%s", Strings);
-			//}
-			//이부분이 막히네
-			//if ((_iEOF = fgets(Strings, SLEN - 1, ff) != EOF)) {
-			//	fprintf(stdout, "%s", Strings);
-			//}
-			//else {
-			//	break;
-			//}
-			if (!feof(ff)) {
-				fgets(Strings, SLEN - 1, ff);
-				//s_gets(Strings, SLEN);
-				//fprintf(stdout, "%s\n", Strings);
-				str_lens = strlen(Strings);
-				strEnd(Strings, str_lens);
-				fputs(Strings, stdout);	//마지막줄이 개행이 안되네?
-				memset(Strings, '\n', sizeof(char) * SLEN);
-			}
-			if (!feof(sf)) {
-				fgets(Strings, SLEN - 1, sf);
-				//s_gets(Strings, SLEN);
-				//fprintf(stdout, "%s\n", Strings);
-				str_lens = strlen(Strings);
-				strEnd(Strings, str_lens);
-				fputs(Strings, stdout);
-				memset(Strings, '\n', sizeof(char) * SLEN);
-			}
-			if (feof(ff) && feof(sf)) {
-				break;
-			}
-		}
-	}
-	fclose(ff);
-	fclose(sf);
 	return 0;
 }
 
