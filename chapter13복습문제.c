@@ -8,6 +8,7 @@
 #define BUFSIZE 4096
 #define SLEN 81
 #define LEN 15
+#define FSIZE 10	// 입력 받을 파일 갯수
 
 char* s_gets(char* st, int n);
 void append(FILE* source, FILE* dest);
@@ -300,10 +301,25 @@ int main(int argc, char *argv[]) {
 	// 5. 전달 인자의 개수가 정확한지, 파일들이 제대로 열렸는지 알려주는 에러 체킹 코드를 포함 할 것.
 	// 6. 파일을 열수 없으면, 그 사실을 출력하고 다음 파일로 넘어 간다.
 	// 명령행 전달인자로 문자와 파일이름을 전달받기
-	if (1 == argc) {	//만약 명령행 전달인자가 기본(본프로그램)이라면...
+	// 명령행 전달인자는 무조건 문자 먼저 입력 받는다고 가정한다.
+	char FileNames[FSIZE][LEN];	// 10개 파일, 길이 15의 파일 명
+	char FindChar;				// 찾아야 할 문자
+	if (1 == argc) {	// 만약 명령행 전달인자가 기본(본프로그램)이라면...
 		puts("명령행 전달인자가 없습니다.\n사용자 입력을 받습니다...");
+		puts("찾아야 할 문자를 입력하세요.");
+		scanf("%c", &FindChar);	// 찾아야 할 문자를 입력 받음
+		getchar();				// 화이트 스페이스 제거
 	}
-
+	if (2 == argc || 1 == argc) {	// 만약 명령행 인자가 하나 일때 즉, 하나의 문자만 입력 받았을 경우
+		puts("명령행 전달인자가 부족합니다.\n파일명을 입력 받습니다...\n(입력 최대 파일 개수는 10개)");
+		for (int i = 0; i < FSIZE; i++) {
+			printf("%d번째 파일명을 입력하세요(파일명 최대 길이%d) : ", i + 1, LEN);
+			fgets(FileNames[i], 15, stdin);
+		}
+	}
+	for (int i = 0; i < FSIZE; i++) {
+		printf("%d번째 파일명 : %s\n", i + 1, FileNames[i]);
+	}
 	return 0;
 }
 
