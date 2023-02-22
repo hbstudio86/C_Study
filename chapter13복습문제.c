@@ -306,7 +306,7 @@ int main(int argc, char *argv[]) {
 	char FileNames[FSIZE][LEN];	// 10개 파일, 길이 15의 파일 명
 	char FindChar;				// 찾아야 할 문자
 	FILE* getFile;				// 파일 포인터 지정
-	unsigned int _int_char = 0	// 문자 카운팅
+	unsigned int _int_char = 0;	// 문자 카운팅
 	if (1 == argc) {	// 만약 명령행 전달인자가 기본(본프로그램)이라면...
 		puts("명령행 전달인자가 없습니다.\n사용자 입력을 받습니다...");
 		puts("찾아야 할 문자를 입력하세요.");
