@@ -21,7 +21,7 @@ void _fSelectSORT(int[], int);	//선택 정렬
 void _fBubbleSORT(int[], int);	//버블 정렬
 void _fInsertSORT(int[], int);	//삽입 정렬#1
 void _fInsertSORT2(int[], int);	//삽입 정렬#2
-void _fQuickSORT(int[], int, int);	//퀵 정렬, 배열, 크기, 비벗위치
+void _fQuickSORT(int[], int, int);	//퀵 정렬, 배열, 피벗, end
 
 int main(void) {
 
@@ -90,7 +90,7 @@ int main(void) {
 			break;
 		case 4:
 			_fResult2(_iParr2, _iArrSize);
-			_fQuickSORT(_iParr2, _iArrSize, 0);
+			_fQuickSORT(_iParr2, 0, _iArrSize);
 		case 5:
 		case 33:
 			puts("NO Function");
@@ -237,7 +237,7 @@ void _fInsertSORT2(int src[], int n) {
 	}
 }
 //퀵 정렬
-void _fQuickSORT(int src[], int n, int Pv) {	//230102 ; pv값은 화면 출력용 값으로 한다. 인덱스에 사용하지 않는다.
+void _fQuickSORT(int src[], int pv, int end) {	//230102 ; pv값은 화면 출력용 값으로 한다. 인덱스에 사용하지 않는다. pv는 0이 들어와야 함
 	//P <...L...> T <...R...>
 	//P <L> T <R> P <L> T <R>
 	//P -> P : 변경 할 필요가 없다
@@ -249,49 +249,36 @@ void _fQuickSORT(int src[], int n, int Pv) {	//230102 ; pv값은 화면 출력용 값으�
 	// 총길이가 3이면 끝
 	// 3 미만이면 비교 후 자리 교환
 	puts("Quick SORT Start");
-	int Step = 0, Comp = 0, tmp = 0;
-	//재귀함수
-	int PV = Pv;	//피벗 0으로 한다
-	int Left = Pv+1, Right = n-1;	//L,R
-	int CNT = 0;	//카운팅
-	int Ltg = 0, Rtg = 0;	//trigger
+	int Pivot, Left, Right;
+	Pivot = pv;
+	Left = pv+1;
+	Right = end - 1;	//길이 값이 들어옴으로 -1을 해줘야 한다.
 
-	if (n == 2) {	//재귀함수를 실행 할 필요가 없는 경우...
-		//_fSwap(&src[PV], &src[Left], );	//이러면 특정 index가아닌 1 <--> 2이런 형식밖에 안됨
-	}
-	else if (n <= 1) {
-
-	}
-	else {	//재귀 함수 실행
-		while (1)
-		{
-			if (src[Left] < src[PV] && Ltg == 0) {	//left가 pv보다 작고 trg가 비활성화면 다음 배열을 확인;피벗은 강제로 0
-				Left++;
-			}
-			else {	//아니면 트리거 활성화
-				Ltg = 1;
-			}
-
-			if (src[Right] > src[PV] && Rtg == 0) {
-				Right--;
-			}
-			else {
-				Rtg = 1;
-			}
-
-			if ((Ltg == 1 && Rtg == 1) && Left < Right) {	//L,R 트리거가 모두 활성화라면...
-				_fSwap(&src[Left], &src[Right], Left, Right);	//제대로 되어 있다면 교환한다.
-				Ltg = Rtg = 0;	//트리거 초기화
-			}
-			else if (Left > Right) {
-				_fSwap(&src[PV], &src[Right], PV, Right);	//L,R이 서로 통과 하였다면 pv와 right를 바꾼다.
-				_fQuickSORT(&src[PV], Right-1, PV);	//L측 분활, L은 0으로 pv로 보낸다. 상수여야 한다. 변수 보내지 말도록
-				_fQuickSORT(&src[Left], n - Right, Left);
-			}
-			CNT++;
-			if (CNT >= n) { //loop의 유한성을 보장하기 위한 장치
-				break;
+	while (1)
+	{
+		if (src[Left] < src[Pivot]) {	//left값이 pivot보다 작은 경우에만 다음것을 보도록 한다.
+			Left++;
+		}
+		if (src[Right] > src[Pivot]) {
+			Right--;
+		}
+		if (Left > Right) {	//중단점	좌우의 index가 교차하거나...
+			if (Right != Pivot) {
+				_fSwap(&src[Pivot], &src[Right], Pivot, Right);	//pivot과 교차된 right의 위치를 swap
+				//여기서 재귀함수 사용
+				//좌측 퀵
+				_fQuickSORT(src, Pivot, Right);
+				//우측 퀵
+				_fQuickSORT(src, Left, end - 1);
+				break;								//break를 걸지, return을 걸지....
 			}
 		}
+		if (src[Left] > src[Pivot] && src[Right] < src[Pivot]) {
+			_fSwap(&src[Left], &src[Right], Left, Right);	//swap 실시
+		}
+
 	}
+
+	return;	//종료 한다.
+
 }
