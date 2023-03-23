@@ -22,6 +22,7 @@ void _fBubbleSORT(int[], int);	//버블 정렬
 void _fInsertSORT(int[], int);	//삽입 정렬#1
 void _fInsertSORT2(int[], int);	//삽입 정렬#2
 void _fQuickSORT(int[], int, int);	//퀵 정렬, 배열, 피벗, end
+//void _fQuickSORT2()
 
 int main(void) {
 
