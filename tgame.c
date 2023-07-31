@@ -15,6 +15,10 @@ int main() {
 		printf("     ¡á¡á¡á¡á   \u2592 \u25a0  \t\t %X\n", j);
 		//PAUSE;
 	}
+	
+	while (1) {
+
+	}
 
 	return 0;
 }
