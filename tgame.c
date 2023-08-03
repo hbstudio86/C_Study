@@ -4,8 +4,12 @@
 
 #define PAUSE system("pause")
 #define CLEAR system("cls")
-#define DELAY Sleep(10)
+#define DELAY Sleep(1000)
 
+/*
+≥≠¿Ãµµ : normal 20 by 100 ?
+
+*/
 
 int main() {
 
@@ -26,11 +30,11 @@ int main() {
 	system("cls");
 
 	printf("\u25a0\u25a0\u25a0\n\u25a0\u25a0\u25a0\n\u25a0\u25a0\u25a0\n"); //3by3 area create..
-	CLEAR; DELAY;
+	DELAY; CLEAR;
 	printf("\u25a0\u25a1\u25a0\n\u25a0\u25a0\u25a0\n\u25a0\u25a0\u25a0\n"); //3by3 area create..
-	CLEAR; DELAY;
+	DELAY; CLEAR;
 	printf("\u25a0\u25a0\u25a0\n\u25a0\u25a1\u25a0\n\u25a0\u25a0\u25a0\n"); //3by3 area create..
-	CLEAR; DELAY;
+	DELAY; CLEAR;
 	printf("\u25a0\u25a0\u25a0\n\u25a0\u25a0\u25a0\n\u25a0\u25a1\u25a0\n"); //3by3 area create..
 	DELAY;
 
