@@ -5,6 +5,8 @@
 #define PAUSE system("pause")
 #define CLEAR system("cls")
 #define DELAY Sleep(1000)
+#define FBLOCK "\u25a0"
+#define EBLOCK "\u25a1"
 
 /*
 ≥≠¿Ãµµ : normal 20 by 100 ?
@@ -29,7 +31,8 @@ int main() {
 
 	system("cls");
 
-	printf("\u25a0\u25a0\u25a0\n\u25a0\u25a0\u25a0\n\u25a0\u25a0\u25a0\n"); //3by3 area create..
+	//printf("\u25a0\u25a0\u25a0\n\u25a0\u25a0\u25a0\n\u25a0\u25a0\u25a0\n"); //3by3 area create..
+	printf("%s%s%s\n%s%s%s\n%s%s%s\n", FBLOCK, FBLOCK, FBLOCK, FBLOCK, FBLOCK, FBLOCK, FBLOCK, FBLOCK, FBLOCK);
 	DELAY; CLEAR;
 	printf("\u25a0\u25a1\u25a0\n\u25a0\u25a0\u25a0\n\u25a0\u25a0\u25a0\n"); //3by3 area create..
 	DELAY; CLEAR;
@@ -38,7 +41,7 @@ int main() {
 	printf("\u25a0\u25a0\u25a0\n\u25a0\u25a0\u25a0\n\u25a0\u25a1\u25a0\n"); //3by3 area create..
 	DELAY;
 
-
+	printf("%zd", sizeof(FBLOCK));
 
 
 	return 0;
