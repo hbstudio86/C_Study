@@ -22,7 +22,7 @@ int main() {
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),j);
 		printf("   \u2592 \u25a0 \u25a1 \t\t %X\n", j);
 		//PAUSE;
-		Sleep(100);
+		Sleep(1000);
 	}
 	//
 	//while (0) {
