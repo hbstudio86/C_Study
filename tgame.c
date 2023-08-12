@@ -13,6 +13,8 @@
 
 */
 
+void title(void);
+
 int main() {
 
 	int j = 0;
@@ -45,4 +47,11 @@ int main() {
 
 
 	return 0;
+}
+
+void title(void) {
+
+
+
+
 }
