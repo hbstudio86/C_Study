@@ -17,10 +17,11 @@ void title(void);
 
 int main() {
 
+	//Main title 영역//
 	title();
 	DELAY;
 	CLEAR;
-
+	//Main title 영역//
 	int j = 0;
 
 	for (int i = 1; i < 16; i++) {
@@ -57,6 +58,5 @@ int main() {
 void title(void) {
 
 	printf("\t\t\tTetris\n");
-
 
 }
