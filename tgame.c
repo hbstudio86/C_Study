@@ -58,5 +58,6 @@ int main() {
 void title(void) {
 
 	printf("\t\t\tTetris\n");
+	printf("build : 202310001\n");
 
 }
