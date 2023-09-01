@@ -59,5 +59,5 @@ void title(void) {
 
 	printf("\t\t\tTetris\n");
 	printf("build : 202310001\n");
-
+	printf("   \u2592 \u25a0 \u25a1 \t\t\n");
 }
