@@ -21,6 +21,8 @@ void arrDel(int);		// 데이터 삭제
 int main(void) {
 
 	// 배열
+		//일반적인 배열은..
+	int arr1[10] = { 0, };	// int 형 배열 10개 생성
 
 	// 연결 리스트
 
