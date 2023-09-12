@@ -17,6 +17,8 @@ void arrDel(int);		// 데이터 삭제
 
 */
 
+// 값 출력 함수
+void arrPrint(int[], int);
 
 int main(void) {
 
