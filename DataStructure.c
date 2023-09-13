@@ -26,6 +26,8 @@ int main(void) {
 		//일반적인 배열은..
 	int arr1[10] = { 0, };	// int 형 배열 10개 생성
 
+	arrPrint(arr1, 10);
+
 	// 연결 리스트
 
 	// 스택
@@ -45,5 +47,13 @@ void arrAdd(int n) {		// 데이터 삽입
 
 }
 void arrDel(int n) {		// 데이터 삭제
+
+}
+
+void arrPrint(int arr[], int n) {
+
+	for (int i = 0; i < n; i++) {
+		printf("Array value is %d \n", arr[i]);
+	}
 
 }
