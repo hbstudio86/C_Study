@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 /*배열 (기본)
 1. 배열 생성
@@ -37,6 +38,8 @@ void arrCreate(int n) {	// 배열 생성 : 동적으로..
 
 }
 void arrAdd(int n) {		// 데이터 삽입
+
 }
 void arrDel(int n) {		// 데이터 삭제
+
 }
