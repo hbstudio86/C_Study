@@ -6,7 +6,9 @@
 3. 데이터 삭제
 
 */
-
+void arrCreate(int);	// 배열 생성 : 동적으로..
+void arrAdd(int);		// 데이터 삽입
+void arrDel(int);		// 데이터 삭제
 /*배열 (링)
 1. 배열 생성
 2. 데이터 삽입
@@ -28,4 +30,13 @@ int main(void) {
 
 
 	return 0;
+}
+
+void arrCreate(int n) {	// 배열 생성 : 동적으로..
+
+
+}
+void arrAdd(int n) {		// 데이터 삽입
+}
+void arrDel(int n) {		// 데이터 삭제
 }
