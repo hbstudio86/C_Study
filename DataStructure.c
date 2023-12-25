@@ -15,11 +15,25 @@ int * arrCreate(int);	// 배열 생성 : 동적으로..
 void arrAdd(int [], int*, int);		// 데이터 삽입
 void arrDel(int);		// 데이터 삭제
 /*배열 (링)
-1. 배열 생성
-2. 데이터 삽입
+1. 배열 생성	: 동적 할당으로 생성
+2. 데이터 삽입 : 
 3. 데이터 삭제
-
+-> 이것을 왜 만들려고 했었지??
 */
+
+
+/*자료 구조 스택*/
+//1. 스택 생성 : 스택의 크기, 정수형만 저장
+int* stackCreate(int);
+//2. 데이터 삽입
+int put();
+//3. 데이터 삭제 : 값을 반환 함
+int pop();
+//4. 스택 상태 확인 (빈 상태인지 가득찬 상태인지 확인 함)
+int _s_isEmpty(int*);
+int _s_isFull(int*);
+
+
 
 // 값 출력 함수
 void arrPrint(int[], int);
@@ -113,5 +127,29 @@ void arrPrint(int arr[], int n) {
 	for (int i = 0; i < n; i++) {
 		printf("Array value is %d _ index [%d] \n", arr[i],i);
 	}
+
+}
+
+/*자료 구조 스택*/
+//1. 스택 생성 : 스택의 크기, 정수형만 저장
+int* stackCreate(int n) {
+
+}
+//2. 데이터 삽입
+int put() {
+
+}
+//3. 데이터 삭제 : 값을 반환 함
+int pop() {
+
+}
+//4. 스택 상태 확인 (빈 상태인지 가득찬 상태인지 확인 함)
+int _s_isEmpty(int* stack) {
+#ifdef DEBUG
+	printf("_?_DEBUG_STACK_SIZE_%d_BYTE", sizeof(stack));
+#endif // DEBUG
+
+}
+int _s_isFull(int* stack) {
 
 }
