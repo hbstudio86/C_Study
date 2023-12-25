@@ -4,6 +4,7 @@
 
 //#define DEBUG 1
 
+static int _s_index = -1;	// stack 용 index 
 
 /*배열 (기본)
 1. 배열 생성
@@ -148,6 +149,11 @@ int _s_isEmpty(int* stack) {
 #ifdef DEBUG
 	printf("_?_DEBUG_STACK_SIZE_%d_BYTE", sizeof(stack));
 #endif // DEBUG
+	
+	if (_s_index != -1) {	// stack에 아무 값이 들어가 있지 않음
+		printf(" ! Information : Stack is Empty! \n");
+	}
+
 
 }
 int _s_isFull(int* stack) {
