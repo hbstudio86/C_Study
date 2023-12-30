@@ -4,6 +4,8 @@
 
 //#define DEBUG 1
 
+//231230 test text
+
 static int _s_index = -1;	// stack 용 index 
 
 /*배열 (기본)
