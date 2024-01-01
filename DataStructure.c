@@ -40,6 +40,8 @@ int _s_isFull(int*);
 
 // 값 출력 함수
 void arrPrint(int[], int);
+void infPrint(char*);
+void debPrint(char*);	// 240101 : 정보 출력 전용 
 
 int main(void) {
 
@@ -136,7 +138,7 @@ void arrPrint(int arr[], int n) {
 /*자료 구조 스택*/
 //1. 스택 생성 : 스택의 크기, 정수형만 저장
 int* stackCreate(int n) {
-
+	int* sArray = (int*)malloc(sizeof(int) * n);	// stack 크기 생성
 }
 //2. 데이터 삽입
 int put() {
