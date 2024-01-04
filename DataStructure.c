@@ -24,8 +24,8 @@ void msgPrint(int);
 //1. 배열
 // createA, addA, delA, clearA
 int* createA(int);
-int addA(int arr[],int,int);
-void outA(void);
+int addA(int [],int);
+void outA(int [],int);
 void clearA(int[]);
 
 
@@ -38,7 +38,8 @@ int main(void) {
 	printf("1. 배열 다루기\n생성할 배열의 크기를 입력하세요...");
 	scanf("%d", &value);
 	arr = createA(value);
-	addA(arr, 1);
+	addA(arr,value);
+	outA(arr, value);
 	clearA(arr);
 	return 0;
 }
@@ -79,19 +80,29 @@ int* createA(int member) {
 	}
 	msgPrint(3); printf("배열 주소 : %p\n", Array);
 #endif // DEBUG
-
 	return Array;
 }
-int addA(int arr[],int size, int value) {	//배열과 값을 받아 0이 아닌 곳에 값을 대입한다.
+
+int addA(int arr[],int size) {	//배열에 값을 순차적으로 대입한다.
 #ifdef DEBUG
 	msgPrint(3); printf("배열의 크기는 %d입니다.\n", size);
 #endif // DEBUG
-
+	for (int i = 0; i < size; i++) {
+		msgPrint(1); printf("arr[%d]원소의 값을 입력 : ",i);
+		scanf("%d", &arr[i]);
+	}
 	//만원 상태
 }
-void outA(void) {
 
+void outA(int arr[],int size) {
+#ifdef DEBUG
+	msgPrint(3); printf("배열의 주소 : %p\n", arr);
+#endif // DEBUG
+	for (int i = 0; i < size; i++) {
+		msgPrint(1); printf("Array[%d] value : %d\n", i, arr[i]);
+	}
 }
+
 void clearA(int arr[]) {
 #ifdef DEBUG
 	msgPrint(3); printf("삭제되는 배열 주소 : %p\n", arr);
