@@ -2,6 +2,7 @@
 #pragma warning(disable:6031)
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define DEBUG 1
 
@@ -18,7 +19,7 @@
 /*
 배열 타입의 배열 삽입 작업 : 사이즈와 배열을 받고 모든 값이 0이 아닌지 확인 후 값 입력 - 완료
 스택을 배열 타입으로 다뤄야 하는데, 구조체 방식으로 할까? 아님 - comp
-스택도 반복문 돌려서 값을 대입할 수 있게 만들어야 함
+스택도 반복문 돌려서 값을 대입할 수 있게 만들어야 함 - comp 
 남은 함수 완성
 */
 ////////////////////////////////////////////////////////////////////////////
@@ -47,6 +48,10 @@ int StackIsEmpty(STACK*);
 STACK* PopS(STACK*, char);
 
 int main(void) {
+	time_t t1 = time(NULL);
+	
+	printf("time = %ld\n", t1);
+
 	printf("정수만 취급합니다.\n");
 	//array
 	int value;
@@ -59,11 +64,22 @@ int main(void) {
 	clearA(arr);
 
 	//stack
+	char item;
 	STACK* stack;
-	stack = createS(10);
-	PushS(stack, 'K');
+	printf("2. 스택 사용하기\n생성할 스택의 크기를 입력하세요...");
+	scanf("%d", &value);
+	getchar();	// 개행문자 처리
+	stack = createS(value);
+	for (int i = 0; i < value; i++) {
+		printf("스택에 넣을 값을 입력하세요...");
+		scanf("%c", &item);
+		getchar();
+		PushS(stack, item);
+	}
+	//PushS(stack, 'K');
 
-
+	time_t t2 = time(NULL);
+	printf("time = %ld\n%ld\n%ld", t2,t1,t2-t1);
 	return 0;
 }
 
