@@ -20,7 +20,8 @@
 배열 타입의 배열 삽입 작업 : 사이즈와 배열을 받고 모든 값이 0이 아닌지 확인 후 값 입력 - 완료
 스택을 배열 타입으로 다뤄야 하는데, 구조체 방식으로 할까? 아님 - comp
 스택도 반복문 돌려서 값을 대입할 수 있게 만들어야 함 - comp 
-남은 함수 완성
+남은 함수 완성 -comp
+main 함수에 스택도 입력 하고 출력 할 수 있게 반복문으로 제어 하도록
 */
 ////////////////////////////////////////////////////////////////////////////
 //function 
@@ -45,7 +46,7 @@ STACK* createS(int);
 int StackIsFull(STACK*);
 STACK* PushS(STACK*, char);
 int StackIsEmpty(STACK*);
-STACK* PopS(STACK*, char);
+STACK* PopS(STACK*);
 
 int main(void) {
 	time_t t1 = time(NULL);
@@ -77,7 +78,7 @@ int main(void) {
 		PushS(stack, item);
 	}
 	//PushS(stack, 'K');
-
+	PopS(stack);
 	time_t t2 = time(NULL);
 	printf("time = %ld\n%ld\n%ld", t2,t1,t2-t1);
 	return 0;
@@ -187,8 +188,24 @@ STACK* PushS(STACK* stack, char item){
 	}
 }
 int StackIsEmpty(STACK* stack){
-
+	if (stack->top == -1) {	// top이 -1이면 없는 것이지
+		msgPrint(1); printf("stack is empty.");
+#ifdef DEBUG
+		msgPrint(3); printf("StackIsEmpty_stack top = %d\n", stack->top);
+#endif // DEBUG
+		return 1;
+	}
+	else {
+		msgPrint(1); printf("stack is not empty.");
+		return 0;
+	}
 }
-STACK* PopS(STACK* stack, char item){
-
+STACK* PopS(STACK* stack){
+	if (StackIsEmpty(stack) == 0) {	// stack에 값이 있다면
+		msgPrint(1); printf("stack pop, value = %c\n", stack->data[stack->top]);
+		stack->top--;	// stack top 값 감소
+	}
+	else {
+		msgPrint(1); printf("Please, pop data before push the data. \n");
+	}
 }
