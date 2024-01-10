@@ -12,7 +12,7 @@
 1. 배열 생성		240103
 2. 스택 : 배열 타입 240105
 	문자를 받는 형태로 만들어야 함
-3. 큐 : 배열 타입
+3. 큐 : 배열 타입 240110
 */
 ////////////////////////////////////////////////////////////////////////////
 /////////////////////////////<해야 하는 작업 들>/////////////////////////////
@@ -47,6 +47,19 @@ int StackIsFull(STACK*);
 STACK* PushS(STACK*, char);
 int StackIsEmpty(STACK*);
 STACK* PopS(STACK*);
+
+//3. 큐
+// createQ QueIsFull PutQ QueIsEmpty PopQ
+typedef struct _que {
+	int front, rear;
+	int size;
+	int* data;
+}Que;
+Que* createQ(int);
+int QueIsFull(Que*);
+void PushQ(Que*, int);
+int QueIsEmpty(Que*);
+void PopQ(Que*);
 
 int main(void) {
 	time_t t1 = time(NULL);
@@ -208,4 +221,35 @@ STACK* PopS(STACK* stack){
 	else {
 		msgPrint(1); printf("Please, pop data before push the data. \n");
 	}
+}
+Que* createQ(int num) {
+	Que* que = (Que*)malloc(sizeof(Que));
+	int* datas = (int*)malloc(sizeof(int) * num);
+	if (que != NULL) {
+		que->front = -1;
+		que->rear = num;
+		que->data = datas;
+		que->size = num;
+	}
+}
+int QueIsFull(Que* que) {
+	if (que->rear >= que->size - 1) {
+		msgPrint(1); printf("que is full");
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+void PushQ(Que* que, int num) {
+	if (QueIsFull != 1) {
+		que->rear++;
+		que->data[que->rear] = num;
+	}
+}
+int QueIsEmpty(Que* que) {
+
+}
+void PopQ(Que* que) {
+
 }
