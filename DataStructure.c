@@ -63,8 +63,12 @@ void PopQ(Que*);
 
 int main(void) {
 	time_t t1 = time(NULL);
-	
-	printf("time = %ld\n", t1);
+	struct tm* times = localtime(&t1);
+
+	printf("프로그램 시작 시간 : %d년 %d월 %d일 %d시 %d분 %d초\n", times->tm_year + 1900, times->tm_mon + 1, times->tm_mday, times->tm_hour, times->tm_min,times->tm_sec);
+
+
+	printf("time = %llu\n", t1);
 
 	printf("정수만 취급합니다.\n");
 	//array
@@ -92,8 +96,26 @@ int main(void) {
 	}
 	//PushS(stack, 'K');
 	PopS(stack);
+
+	//que
+	Que* que;
+	printf("3. 큐 사용하기 \n생성할 큐의 크기를 입력하세요...");
+	scanf("%d", &value);
+	getchar();
+	que = createQ(value);
+	PushQ(que, 1);
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
 	time_t t2 = time(NULL);
-	printf("time = %ld\n%ld\n%ld", t2,t1,t2-t1);
+	printf("time = %llu\n%llu\n%llu\n", t2,t1,t2-t1);
+	times = localtime(&t2);
+	time_t t3 = t2 - t1;
+	printf("프로그램 종료 시간 : %d년 %d월 %d일 %d시 %d분 %d초\n", times->tm_year + 1900, times->tm_mon + 1, times->tm_mday, times->tm_hour, times->tm_min, times->tm_sec);
+	times = localtime(&t3);
+	printf("프로그램 동작 시간 : %d년 %d월 %d일 %d시 %d분 %d초\n", times->tm_year - 70, times->tm_mon, times->tm_mday -1, times->tm_hour -9, times->tm_min, times->tm_sec);
 	return 0;
 }
 
@@ -227,10 +249,19 @@ Que* createQ(int num) {
 	int* datas = (int*)malloc(sizeof(int) * num);
 	if (que != NULL) {
 		que->front = -1;
-		que->rear = num;
+		que->rear = -1;
 		que->data = datas;
 		que->size = num;
+#ifdef DEBUG
+	msgPrint(3); printf("createQ_que address = %p\n", que);
+	msgPrint(3); printf("createQ_que datas address = %p\n", datas);
+	msgPrint(3); printf("createQ_que front = %d\n", que->front);
+	msgPrint(3); printf("createQ_que rear = %d\n", que->rear);
+	msgPrint(3); printf("createQ_que size = %d\n", que->size);
+#endif // DEBUG
 	}
+	msgPrint(1); printf("que is created.\n");
+	return que;
 }
 int QueIsFull(Que* que) {
 	if (que->rear >= que->size - 1) {
@@ -242,9 +273,17 @@ int QueIsFull(Que* que) {
 	}
 }
 void PushQ(Que* que, int num) {
-	if (QueIsFull != 1) {
+	if (QueIsFull(que) != 1) {
 		que->rear++;
+#ifdef DEBUG
+		msgPrint(3); printf("PushQ_que[%d] = %d (before)\n",que->rear, que->data[que->rear]);
+#endif // DEBUG
 		que->data[que->rear] = num;
+		msgPrint(1); printf("%d is pushed to que.\n",num);
+#ifdef DEBUG
+		msgPrint(3); printf("PushQ_que[%d] = %d (after)\n", que->rear, que->data[que->rear]);
+#endif // DEBUG
+
 	}
 }
 int QueIsEmpty(Que* que) {
