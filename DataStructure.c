@@ -65,10 +65,7 @@ int main(void) {
 	time_t t1 = time(NULL);
 	struct tm* times = localtime(&t1);
 
-	printf("프로그램 시작 시간 : %d년 %d월 %d일 %d시 %d분 %d초\n", times->tm_year + 1900, times->tm_mon + 1, times->tm_mday, times->tm_hour, times->tm_min,times->tm_sec);
-
-
-	printf("time = %llu\n", t1);
+	//printf("time = %llu\n", t1);
 
 	printf("정수만 취급합니다.\n");
 	//array
@@ -104,15 +101,14 @@ int main(void) {
 	getchar();
 	que = createQ(value);
 	PushQ(que, 1);
-
-
-
+	PopQ(que);
 
 /////////////////////////////////////////////////////////////////////////////////////
 	time_t t2 = time(NULL);
-	printf("time = %llu\n%llu\n%llu\n", t2,t1,t2-t1);
+	//printf("time = %llu\n%llu\n%llu\n", t2,t1,t2-t1);
 	times = localtime(&t2);
 	time_t t3 = t2 - t1;
+	printf("프로그램 시작 시간 : %d년 %d월 %d일 %d시 %d분 %d초\n", times->tm_year + 1900, times->tm_mon + 1, times->tm_mday, times->tm_hour, times->tm_min, times->tm_sec);
 	printf("프로그램 종료 시간 : %d년 %d월 %d일 %d시 %d분 %d초\n", times->tm_year + 1900, times->tm_mon + 1, times->tm_mday, times->tm_hour, times->tm_min, times->tm_sec);
 	times = localtime(&t3);
 	printf("프로그램 동작 시간 : %d년 %d월 %d일 %d시 %d분 %d초\n", times->tm_year - 70, times->tm_mon, times->tm_mday -1, times->tm_hour -9, times->tm_min, times->tm_sec);
@@ -283,12 +279,21 @@ void PushQ(Que* que, int num) {
 #ifdef DEBUG
 		msgPrint(3); printf("PushQ_que[%d] = %d (after)\n", que->rear, que->data[que->rear]);
 #endif // DEBUG
-
 	}
 }
 int QueIsEmpty(Que* que) {
-
+	if (que->rear == -1 || que->rear == que->front) {	// rear가 초기 위치, front와 같으면 데이터가 없음
+		msgPrint(1); printf("que is empty.\n");
+#ifdef DEBUG
+		msgPrint(3); printf("QueIsEmpty_que rear : %d, front : %d\n", que->rear, que->front);
+#endif // DEBUG
+		return 1;
+	}
+	return 0;
 }
 void PopQ(Que* que) {
-
+	if (QueIsEmpty(que) != 1) {
+		que->front++;
+		msgPrint(1); printf("que pop value is %d \n", que->data[que->front]);
+	}
 }
